@@ -29,11 +29,53 @@
 
     <div class="container" ng-controller="AlbumsIndexController as albumsIndexCtrl">
       <!--html inside of here can use the information from the AlbumsIndexController-->
-      <div class="add-new-album">
-        <p>ADD NEW ALBUM</p>
-        <input id="input-album-name" type="text" class="form-control" placeholder="New album name" ng-model="albumsIndexCtrl.newAlbum.name">
-        <input id="input-artist-name" type="text" class="form-control" placeholder="New album artist" ng-model="albumsIndexCtrl.newAlbum.artistName">
+
+      <!-- ADD NEW ALBUM FORM -->
+      <div class="add-new-album" class="container">
+        <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <form ng-submit="albumsIndexCtrl.createAlbum()" class="form-horizontal">
+            <fieldset>
+              <p>ADD NEW ALBUM</p>
+
+              <!-- INPUT ALBUM NAME -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Album Name</label>
+                <div class="col-med-4">
+                  <input id="input-album-name" type="text" class="form-control" placeholder="New album name" ng-model="albumsIndexCtrl.newAlbum.name">
+                </div>
+              </div>
+              <!-- INPUT ARTIST NAME -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Artist Name</label>
+                <div class="col-med-4">
+                  <input id="input-artist-name" type="text" class="form-control" placeholder="New album artist" ng-model="albumsIndexCtrl.newAlbum.artistName">
+                </div>
+              </div>
+              <!-- INPUT RELEASE DATE -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="releaseDate">Release Date</label>
+                <div class="col-med-4">
+                  <input id="input-album-releaseDate" type="text" class="form-control" placeholder="Add release date (month date, year)" ng-model="albumsIndexCtrl.newAlbum.releaseDate">
+                </div>
+              </div>
+              <!-- INPUT GENRE(S) -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="genres">Genre(s)</label>
+                <div class="col-med-4">
+                  <input id="input-album-genres" type="text" class="form-control" placeholder="Add genres separated by commas" ng-model="albumsIndexCtrl.newAlbum.genres">
+                </div>
+              </div>
+              <!-- SUBMIT BUTTON -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4">
+                  <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+          </fieldset>
       </div>
+
       <!-- SEARCH BAR -->
       <div id="search-bar">
         <label>SEARCH BY ALBUM NAME<input class="form-control" ng-model="search.name" placeholder=""></label>
@@ -55,6 +97,16 @@
               <li class="list-group-item">
                 <h4 class='inline-header'>Artist:</h4>
                   <span class='album-name'>{{album.artistName}}</span>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class='inline-header'>Release Date:</h4>
+                  <span class='album-name'>{{album.releaseDate}}</span>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class='inline-header'>Genre(s):</h4>
+                  <span class='album-name'>{{album.genres.join(', ')}}</span>
               </li>
 
         </div>

@@ -8,30 +8,46 @@
    .module('tunely', [])
    .controller('AlbumsIndexController', AlbumsIndexController);
 
-/*
- * CONTROLLERS
- */
+/***************
+ * CONTROLLERS *
+ ***************/
 
-function AlbumsIndexController() {
+// Inject $http service in the controller
+AlbumsIndexController.$inject = ['$http'];
+
+function AlbumsIndexController($http) {
   var vm = this;
+  vm.albums = [];
   vm.newAlbum = {};
 
   vm.newAlbum = {
-    name: 'License to Ill',
-    artistName: 'Beastie Boys'
+    name: '',
+    artistName: '',
+    releaseDate: '',
+    genres: []
   };
-  vm.albums = [
-    {
-      name: 'Coming Home',
-      artistName: 'Leon Bridges'
-    },
-    {
-      name: 'Are We There',
-      artistName: 'Sharon Van Etten'
-    },
-    {
-      name: 'The Queen is Dead',
-      artistName: 'The Smiths'
-    }
-  ];
+
+  // DISPLAY ALL ALBUMS
+  $http({
+    method: 'GET',
+    url: '/api/albums'
+  }).then(function successCallback(response) {
+    vm.albums = response.data; // display albums as response
+  }, function errorCallback(response) {
+    console.log("There was an error getting the data", response);
+  });
+
+  // CREATE ALBUM
+  vm.createAlbum = function() {
+    $http({
+      method: "POST",
+      url: "/api/albums",
+      data: vm.newAlbum
+    }).then(function successCallback(response) {
+      vm.newAlbum = response.data; // response data is the new album
+      vm.albums.push(vm.newAlbum); // add response data to albums array
+    }, function errorCallback(response) {
+      console.log("There was an error posting the data", response);
+    });
+  }
 }
