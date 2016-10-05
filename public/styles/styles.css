@@ -17,3 +17,20 @@
 .hidden {
   display: none;
 }
+
+.col-xs-12 {
+  padding: 0;
+}
+
+.album-row {
+  margin-top: 5vh;
+}
+
+#search-bar {
+  margin-top: 5vh;
+  display: inline-block;
+}
+
+#input-album-name {
+  margin-bottom: 2vh;
+}
