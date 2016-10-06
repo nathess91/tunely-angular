@@ -46,8 +46,22 @@ function AlbumsIndexController($http) {
     }).then(function successCallback(response) {
       vm.newAlbum = response.data; // response data is the new album
       vm.albums.push(vm.newAlbum); // add response data to albums array
+      vm.newAlbum.name = "BATMAN!!";
     }, function errorCallback(response) {
       console.log("There was an error posting the data", response);
     });
   }
-}
+
+  // DELETE album
+  vm.deleteAlbum = function(album) {
+    $http({
+      method: 'DELETE',
+      url: '/api/albums/' + album._id
+    }).then(function successCallback(deletedAlbum) {
+      var index = vm.albums.indexOf(deletedAlbum); // if deleted album is found in albums
+      vm.albums.splice(index, 1);
+    }, function errorCallback(response) {
+      console.log('There was an error deleting the data', response);
+    });
+  }
+} // end controller
