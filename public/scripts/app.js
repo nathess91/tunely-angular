@@ -46,13 +46,13 @@ function AlbumsIndexController($http) {
     }).then(function successCallback(response) {
       vm.newAlbum = response.data; // response data is the new album
       vm.albums.push(vm.newAlbum); // add response data to albums array
-      vm.newAlbum.name = "BATMAN!!";
+      // vm.newAlbum.name = "BATMAN!!";
     }, function errorCallback(response) {
       console.log("There was an error posting the data", response);
     });
   }
 
-  // DELETE album
+  // DELETE ALBUM
   vm.deleteAlbum = function(album) {
     $http({
       method: 'DELETE',
@@ -64,4 +64,18 @@ function AlbumsIndexController($http) {
       console.log('There was an error deleting the data', response);
     });
   }
+
+  // EDIT ALBUM
+  vm.editAlbum = function(album) {
+    $http({
+      method: 'PUT',
+      url: '/api/albums/' + album._id,
+      data: album
+    }).then(function successCallback(updatedAlbum) {
+      vm.albums.push(updatedAlbum);
+    }, function errorCallback(response) {
+      console.log('There was an error updating the data', response);
+    });
+  }
+
 } // end controller
