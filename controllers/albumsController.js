@@ -51,6 +51,7 @@ function update(req, res) {
     foundAlbum.artistName = req.body.artistName;
     foundAlbum.name = req.body.name;
     foundAlbum.releaseDate = req.body.releaseDate;
+    foundAlbum.genres = req.body.genres;
     foundAlbum.save(function(err, savedAlbum) {
       if(err) { console.log('saving altered album failed'); }
       res.json(savedAlbum);
