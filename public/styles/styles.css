@@ -8,6 +8,10 @@
   height: 350px;
 }
 
+#jumbo {
+  text-decoration: none;
+}
+
 .inline-header {
   display: inline-block;
   vertical-align: baseline;
